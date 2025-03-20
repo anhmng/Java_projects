@@ -1,0 +1,30 @@
+import java.util.Scanner; //Import Scanner class
+import java.lang.Math; // Import Math
+
+class Main {
+    public static void main(String[] args) {
+        int randomNum = (int) (Math.random () * 100) + 1; //generate 1 < # < 100
+        // Math.random() only generates double bwt 0.0 and 1.0
+        // Math.random() * 100 scales it to 0.0 to 99.9999
+        // (int) converts it to an integer (0-99)
+        // + 1 shifts the range to 1-100
+        
+        //********* can also use Random class******** but will do this for another one
+        int attemptsNum = 0;
+        int userInput = -1; // placeholder for the while statement
+        Scanner scanner = new Scanner (System.in); // this is to store the user input
+        
+        while (userInput != randomNum) {
+            System.out.print ("Please enter a random integer between 1 and 100: ");
+            userInput = scanner.nextInt();
+            attemptsNum++;
+            if (userInput < randomNum) {
+                System.out.println ("Too low! Try again.");
+            }
+            else if (userInput > randomNum) {
+                System.out.println ("Too high! Try again.");
+            }
+        }
+        System.out.println("Congratulations! yyou guessed it in " + attemptsNum + " tries.");
+    }
+}
