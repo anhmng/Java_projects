@@ -1,0 +1,75 @@
+// To-Do List (Console-Based)
+//Add, remove, and view tasks.
+//Store tasks in an ArrayList.
+//Implement file handling for data persistence.
+
+import java.util.ArrayList;//ArrayList<String> allows dynamic resizing
+import java.util.Scanner;
+
+public class ToDoList {
+    public static void main(String[] args) {
+        ArrayList<String> tasks = new ArrayList<>();
+        Scanner scanner = new Scanner (System.in);
+        boolean running = true; // to keep the program running
+        
+        //start the loop so user can interact multiple times
+        while (running ) {
+            //Menu options
+            System.out.println("\nTo-Do List:");
+            System.out.println("1. Add  Task");
+            System.out.println("2. Remove Task");
+            System.out.println("3, View Task");
+            System.out.println("4. Exit");
+            System.out.print ("Choose an option: ");
+            
+            //Get user nput (menu choice)
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character left by nextInt()
+            
+            switch (choice) {
+                case 1: //Add Task
+                    System.out.print("Enter task: ");
+                    String task = scanner.nextLine();
+                    tasks.add(task); //Add task to the ArrayList
+                    System.out.println ("Task added!");
+                    break;
+                
+                case 2: //Remove Task
+                    System.out.println ("Enter task number to remove: ");
+                    int removeIndex = scanner.nextInt(); // Get the task number to remove
+                    
+                    //Validate if the index is within the range
+                    if (removeIndex >= 1 && removeIndex <= tasks.size()) {
+                        tasks.remove ( removeIndex - 1); // Remove task from ArrayList (rmb how the index for array started with 1 not 0)
+                        System.out.println ("Task removed!");
+                    } else {
+                        System.out.println ("invalid task number.");
+                    }
+                    break;
+                    
+                case 3: //View tasks
+                    System.out.println ("\nYour To-Do List:");
+                    
+                    //Check if the list is empty
+                    if (tasks.isEmpty()) {
+                        System.out.println ("No tasks available.");
+                    } else {
+                        //create a for loop to print each task with a number
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println ((i + 1) + ". " + tasks.get(i));
+                        }
+                    }
+                    break;
+                
+                case 4: //Exit
+                    System.out.println ("Goodbye!");
+                    running = false;
+                    break;
+                    
+                default: 
+                System.out.println ("Invalid option. Try again."); // handle invalid input
+            }
+        }
+        scanner.close();
+    }
+}
